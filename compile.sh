@@ -1,0 +1,1 @@
+"C:\DEV\pony\ponyc-master\build\release-llvm-3.9.1\ponyc.exe" ponyvm -o ./out
