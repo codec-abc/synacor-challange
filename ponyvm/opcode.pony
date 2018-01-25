@@ -56,18 +56,18 @@ class val Jump
 
 class val JumpNotZero
     let value : U16
-    let cell_result : U16
+    let jump_location : U16
 
-    new val create(value' : U16, cell_result' : U16) =>
-        cell_result = cell_result'
+    new val create(value' : U16, jump_location' : U16) =>
+        jump_location = jump_location'
         value = value'
 
 class val JumpZero
     let value : U16
-    let cell_result : U16
+    let jump_location : U16
 
-    new val create(value' : U16, cell_result' : U16) =>
-        cell_result = cell_result'
+    new val create(value' : U16, jump_location' : U16) =>
+        jump_location = jump_location'
         value = value'
 
 class val Add
@@ -153,25 +153,25 @@ class val Not
 
 class val ReadMemory
     let cell_result : U16
-    let operand : U16
+    let memory_address_to_read : U16
 
     new val create(
             cell_result' : U16, 
-            operand' : U16
+            memory_address_to_read' : U16
     ) =>
         cell_result = cell_result'
-        operand = operand'
+        memory_address_to_read = memory_address_to_read'
 
 class val WriteMemory
-    let cell_result : U16
-    let operand : U16
+    let memory_address_to_write : U16
+    let value : U16
 
     new val create(
-            cell_result' : U16, 
-            operand' : U16
+            memory_address_to_write' : U16, 
+            value' : U16
     ) =>
-        cell_result = cell_result'
-        operand = operand'
+        memory_address_to_write = memory_address_to_write'
+        value = value'
 
 class val Call
     let value : U16
