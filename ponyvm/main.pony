@@ -44,7 +44,6 @@ class ref VM
         _stack = List[U16]()
         _program_counter = 0
 
-
 actor Main
     new create(env : Env) =>
         try
@@ -52,5 +51,5 @@ actor Main
             let first_op_code_result = OpCodeReader(memory)?
             env.out.print("bytes read " + first_op_code_result.nb_words_read.string())
         else
-            env.out.print("program failure. Exiting...")
+            Unreachable()
         end
