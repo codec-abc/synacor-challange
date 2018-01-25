@@ -214,7 +214,15 @@ class val ParseResult
         nb_words_read = nb_words_read'
 
 primitive OpCodeReader
-    fun apply(words_chunck : Seq[U16]) : ParseResult? =>
+    fun apply(words_chunck : Seq[U16]) : ParseResult =>
+        try
+            _apply(words_chunck)?
+        else
+            let u : Unreachable ref = Unreachable()
+            ParseResult(NoOp, 0)
+        end
+
+    fun _apply(words_chunck : Seq[U16]) : ParseResult? =>
         let first_word = words_chunck(0)?
         match first_word 
         | 0 => 
@@ -236,7 +244,7 @@ primitive OpCodeReader
             ParseResult(gt_op_code, 4)
         | 6 =>
             let jmp_op_code = Jump(words_chunck(1)?)
-            ParseResult(jmp_op_code, 4)
+            ParseResult(jmp_op_code, 2)
         | 7 =>
             let jt_op_code = JumpNotZero(words_chunck(1)?, words_chunck(2)?)
             ParseResult(jt_op_code, 3) 
@@ -272,7 +280,7 @@ primitive OpCodeReader
             ParseResult(call_op_code, 2)
         | 18 =>
             let ret_op_code = Return
-            ParseResult(ret_op_code, 2)
+            ParseResult(ret_op_code, 1)
         | 19 => 
             let out_op_code = Out(words_chunck(1)?)
             ParseResult(out_op_code, 2)
